@@ -29,6 +29,7 @@ public:
 public:
     int getLength() const;
     T get(int index) const;
+    void set(int index, T value) const;
     T getFirst() const;
     T getLast() const;
     LinkedList<T> getSubLinkedList(int fromIndex, int toIndex);
@@ -251,6 +252,29 @@ T& LinkedList<T>::operator[](int index) {
             current = current -> next;
         }
         return current -> value;
+    }
+}
+
+template<class T>
+void LinkedList<T>::set(int index, T value)  {
+    if (index < 0 || index > length) {
+        throw Exception(1);
+    }
+    if (index == 0) {
+        prepend(data);
+    } else if (index == length) {
+        append(data);
+    } else {
+        Node* current = head;
+        Node* adding = new Node();
+        adding -> value = data;
+        for (int i = 0; i < index - 1; i++) {
+            current = current -> next;
+        }
+        Node* tmp = current -> next;
+        current -> next = adding;
+        adding -> next = tmp;
+        length++;
     }
 }
 

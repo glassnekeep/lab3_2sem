@@ -27,6 +27,7 @@ public:
     T getFirst() override;
     T getLast() override;
     T get(int index) override;
+    void set(int index, T value) override;
     Sequence<T>* getSubsequence(int fromIndex,int toIndex ) override;
     void insertAt(T item,int index) override;
     void append(T item) override;
@@ -55,8 +56,7 @@ ostream & operator << (ostream & out, ArraySequence<T> a) {
             out << a.get(i) << " ";
         }
         return out;
-    }
-    catch (Exception& exception) {
+    } catch (Exception& exception) {
         throw exception;
     }
 }
@@ -191,6 +191,11 @@ Sequence <T>* ArraySequence<T>::concat(Sequence<T> * list) {
     } catch (Exception& exception) {
         throw exception;
     }
+}
+
+template<class T>
+void ArraySequence<T>::set(int index, T value) {
+    array -> set(index, value);
 }
 
 #endif //LAB22SEMARRAYSEQUENCEH

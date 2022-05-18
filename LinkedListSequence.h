@@ -24,6 +24,8 @@ public:
     T getFirst() override;
     T getLast() override;
     T get(int index) override;
+    void set(int index, T value) override;
+
     Sequence<T>* getSubsequence(int fromIndex,int toIndex ) override;
     void insertAt(T item,int index) override;
     void append(T item) override;
@@ -79,7 +81,7 @@ T LinkedListSequence<T>::get(int index) {
 
 template<class T>
 Sequence<T> *LinkedListSequence<T>::getSubsequence(int fromIndex, int toIndex) {
-    return new LinkedListSequence<T>(list ->getSubLinkedList(fromIndex, toIndex));
+    return new LinkedListSequence<T>(list -> getSubLinkedList(fromIndex, toIndex));
 }
 
 template<class T>
@@ -136,6 +138,18 @@ Sequence<T> *LinkedListSequence<T>::concat(Sequence<T> *sequence) {
             throw exception;
         }
     }
+}
+
+template<class T>
+void LinkedListSequence<T>::map(T (*mapFunc)(T)) {
+    for (int i = 0; i < getLength(); i++) {
+        list[i] = mapFunc(list[i]);
+    }
+}
+
+template<class T>
+void LinkedListSequence<T>::set(int index, T value) {
+    list -> set(index, value);
 }
 
 template<typename T>
