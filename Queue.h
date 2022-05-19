@@ -25,9 +25,23 @@ public:
             internalListSequence -> append(que.peek(i));
         }
     }
+    Queue(T* items, int count) {
+        internalListSequence = new LinkedListSequence(items, count);
+    }
+    explicit Queue(const LinkedListSequence<T>& list) {
+        internalListSequence = new LinkedListSequence<T>(list);
+    }
     // Деструктор
     ~Queue() {
         delete internalListSequence;
+    }
+    T get(int index) {
+        try {
+            T result = internalListSequence -> get(index);
+            return result;
+        } catch (Exception& exception) {
+            throw exception;
+        }
     }
     // добавить элемент в очередь
     void push(const T& data) {
@@ -78,24 +92,29 @@ public:
         return this;
     }
     Queue<T>* getSubsequence(int startIndex, int endIndex) {
-        auto* bufQue = new Queue<T>;
-        bufQue -> internalListSequence = internalListSequence -> getSubsequence(startIndex, endIndex);
-        return bufQue;
+        internalListSequence -> getSubsequence(startIndex, endIndex);
+        return this;
     }
     bool subSequence(Queue<T>& queue) {
         return internalListSequence -> subSequence(queue.internalListSequence);
     }
-
-    ostream & operator << (ostream & out, Queue<T> a) {
-        try {
-            for (int i = 0; i < queue.getSize(), ++i) {
-                out << queue.get(i) << " ";
-            }
-            return out;
-        } catch (Exception &exception) {
-            throw exception;
+    T& operator[](int index) {
+        if (index > getSize() - 1 || index < 0) {
+            throw Exception(1);
         }
+        return internalListSequence[index];
     }
 };
+template <typename T>
+ostream & operator << (ostream & out, Queue<T> queue) {
+    try {
+        for (int i = 0; i < queue.getSize(); ++i) {
+            out << queue.get(i) << " ";
+        }
+        return out;
+    } catch (Exception &exception) {
+        throw exception;
+    }
+}
 
 #endif //LAB2_2SEM_QUEUE_H
