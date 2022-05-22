@@ -32,6 +32,7 @@ public:
     void prepend(T item) override;
     T& operator[](int index)override;
     Sequence <T> * concat(Sequence <T> * sequence)override;
+
 };
 
 template<class T>
@@ -140,12 +141,12 @@ Sequence<T> *LinkedListSequence<T>::concat(Sequence<T> *sequence) {
     }
 }
 
-template<class T>
+/*template<class T>
 void LinkedListSequence<T>::map(T (*mapFunc)(T)) {
     for (int i = 0; i < getLength(); i++) {
         list[i] = mapFunc(list[i]);
     }
-}
+}*/
 
 template<class T>
 void LinkedListSequence<T>::set(int index, T value) {

@@ -53,7 +53,7 @@ void listSequenceConcatTests() {
     int items[5]={123, 312, 412, 45, 12};
     auto* list= new LinkedListSequence<int>(items,5);
     Sequence<int>* second = new LinkedListSequence <int>();
-    second=second -> concat(list);
+    second = second -> concat(list);
 }
 void listSequenceTest() {
     listSequenceFromArrayTest();

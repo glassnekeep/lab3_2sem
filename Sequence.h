@@ -42,7 +42,7 @@ public:
         for (int i = 0; i < getLength() - seq -> getLength(); i++) {
             result = true;
             for (int j = 0; j < seq -> getLength(); j++) {
-                result & = (get(i + j) == (seq -> get(j)));
+                result = (get(i + j) == (seq -> get(j)));
             };
             if (result) break;
         }
@@ -54,7 +54,7 @@ template<class T>
 T Sequence<T>::reduce(T (*reduceFunc)(T &, T &), T startVal) {
     T buf = startVal;
     for (int i = 0; i < getLength(); i++) {
-        buf = reduceFunc(get(i), buf)
+        buf = reduceFunc(get(i), buf);
     }
     return buf;
 }
@@ -66,14 +66,14 @@ void Sequence<T>::map(T (*mapFunc)(T)) {
     }
 }
 
-template<class T>
-Sequence* Sequence<T>::where(bool (*whereFunc)(T)) {
+/*template<class T>
+Sequence<T>* Sequence<T>::where(bool (*whereFunc)(T)) {
     Sequence<T> *buf = new Sequence<T>();
     for (int i = 0; i < this -> getLength(); i++) {
         if (whereFunc(this -> get(i))) buf -> append(this -> get(i));
     }
     return (Sequence*) buf;
-}
+}*/
 
 template <class T>
 std::ostream& operator<<(std::ostream& out, Sequence<T>* seq) {

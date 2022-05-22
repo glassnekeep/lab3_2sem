@@ -6,7 +6,7 @@
 #include "LinkedListTest.h"
 #include "DynamicArrayTest.h"
 #include "LinkedListSequenceTest.h"
-#include "Exception.h"
+#include "QueueTest.h"
 using namespace std;
 
 int main() {
@@ -17,4 +17,6 @@ int main() {
     linkedListTest();
     cout << endl;
     listSequenceTest();
+    cout << endl;
+    queueTest();
 }

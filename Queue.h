@@ -14,6 +14,7 @@ class Queue {
 private:
     LinkedListSequence<T>* internalListSequence; // указатель на связный список
 public:
+    T& operator[](int index);
     // Конструкторы
     Queue() {
         internalListSequence = new LinkedListSequence<T>();
@@ -47,8 +48,6 @@ public:
     void push(const T& data) {
         internalListSequence -> append(data);
     }
-    //pol вместо pop по соглашению
-    // удалить элемент из начала очереди
     T pop() {
         T result = internalListSequence -> getFirst();
         internalListSequence = (LinkedListSequence<T>*)internalListSequence -> getSubsequence(1, internalListSequence->getLength() - 1);
@@ -92,19 +91,21 @@ public:
         return this;
     }
     Queue<T>* getSubsequence(int startIndex, int endIndex) {
-        internalListSequence -> getSubsequence(startIndex, endIndex);
-        return this;
+        //this -> internalListSequence -> getSubsequence(startIndex, endIndex);
+        return new Queue<T>(internalListSequence -> getSubsequence(startIndex, endIndex));
     }
     bool subSequence(Queue<T>& queue) {
         return internalListSequence -> subSequence(queue.internalListSequence);
     }
-    T& operator[](int index) {
-        if (index > getSize() - 1 || index < 0) {
-            throw Exception(1);
-        }
-        return internalListSequence[index];
-    }
 };
+template <class T>
+T& Queue<T>::operator[](int index) {
+    if (index > getSize() - 1 || index < 0) {
+        throw Exception(1);
+    }
+    return internalListSequence[index];
+}
+
 template <typename T>
 ostream & operator << (ostream & out, Queue<T> queue) {
     try {
