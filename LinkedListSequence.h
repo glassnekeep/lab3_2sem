@@ -67,7 +67,7 @@ T LinkedListSequence<T>::getFirst() {
 
 template<class T>
 T LinkedListSequence<T>::getLast() {
-    if (list -> getLength() > 0) { return list -> get(list -> getLength()); }
+    if (list -> getLength() > 0) { return list -> get(list -> getLength() - 1); }
 }
 
 template<class T>

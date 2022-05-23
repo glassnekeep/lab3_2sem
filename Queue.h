@@ -20,16 +20,16 @@ public:
         internalListSequence = new LinkedListSequence<T>();
     }
     //Конструктор копирования
-    Queue(Queue<T>& que) {
+    /*Queue(const Queue<T>& que) {
         internalListSequence = new LinkedListSequence<T>();
         for (int i = 0; i< que.getSize();i++) {
             internalListSequence -> append(que.peek(i));
         }
-    }
+    }*/
     Queue(T* items, int count) {
         internalListSequence = new LinkedListSequence(items, count);
     }
-    explicit Queue(const LinkedListSequence<T>& list) {
+    Queue(const LinkedListSequence<T>& list) {
         internalListSequence = new LinkedListSequence<T>(list);
     }
     // Деструктор
@@ -79,6 +79,7 @@ public:
         return (internalListSequence -> getLength() < 1);
     }
     void map(T mupFunc(T arg)) {
+        int size = internalListSequence -> getLength();
         internalListSequence -> map(mupFunc);
     }
     void where(bool(*whereFunc)(T)) {

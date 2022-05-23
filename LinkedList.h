@@ -257,25 +257,11 @@ T& LinkedList<T>::operator[](int index) {
 
 template<class T>
 void LinkedList<T>::set(int index, T value)  {
-    if (index < 0 || index > length) {
-        throw Exception(1);
+    Node* buf = head;
+    for (int i = 0; i < index; i++) {
+        buf = buf -> next;
     }
-    if (index == 0) {
-        prepend(value);
-    } else if (index == length) {
-        append(value);
-    } else {
-        Node* current = head;
-        Node* adding = new Node();
-        adding -> value = value;
-        for (int i = 0; i < index - 1; i++) {
-            current = current -> next;
-        }
-        Node* tmp = current -> next;
-        current -> next = adding;
-        adding -> next = tmp;
-        length++;
-    }
+    buf -> value = value;
 }
 
 
