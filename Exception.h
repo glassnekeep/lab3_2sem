@@ -11,8 +11,8 @@
 using namespace std;
 
 enum Error {
-    INDEX_OUT_OF_RANGE=1,
-    NULL_POINTER=2,
+    INDEX_OUT_OF_RANGE = 1,
+    NULL_POINTER = 2,
     NEGATIVE_SIZE = 3,
 };
 

@@ -20,12 +20,8 @@ public:
         internalListSequence = new LinkedListSequence<T>();
     }
     //Конструктор копирования
-    Queue(const Queue& que) {
-        /*internalListSequence = new LinkedListSequence<T>();
-        for (int i = 0; i< que.getSize();i++) {
-            internalListSequence -> append(que.peek(i));
-        }*/
-        internalListSequence = new LinkedListSequence<T>(que.internalListSequence);
+    Queue(Queue& que) {
+        internalListSequence = new LinkedListSequence<T>(*que.internalListSequence);
     }
     Queue(T* items, int count) {
         internalListSequence = new LinkedListSequence(items, count);
@@ -92,9 +88,9 @@ public:
         internalListSequence -> concat(que2.internalListSequence);
         return this;
     }
-    Queue<T>* getSubsequence(int startIndex, int endIndex) {
+    Sequence<T>* getSubsequence(int startIndex, int endIndex) {
         //this -> internalListSequence -> getSubsequence(startIndex, endIndex);
-        return new Queue<T>(internalListSequence -> getSubsequence(startIndex, endIndex));
+        return internalListSequence -> getSubsequence(startIndex, endIndex);
     }
     bool subSequence(Queue<T>& queue) {
         return internalListSequence -> subSequence(queue.internalListSequence);

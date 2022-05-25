@@ -22,14 +22,14 @@ void queuePrependTest() {
     assert(queue -> get(0) == 42);
 }
 
-/*void queueSubSequenceTest() {
+void queueSubSequenceTest() {
     int items[5] = {23, 12, 43, 54, 73};
     Queue<int>* queue = new Queue<int>(items, 5);
-    Queue<int>* subQueue = queue -> getSubsequence(1, 3);
+    Sequence<int>* sequence = queue -> getSubsequence(1, 3);
     for (int i = 0; i < 3; i++) {
-        assert(queue -> get(i + 1) == subQueue -> get(i));
+        assert(queue -> get(i + 1) == sequence -> get(i));
     }
-}*/
+}
 
 void pushTest() {
     int items[5] = {23, 12, 43, 54, 73};
@@ -59,8 +59,8 @@ T multiplyByTwo(T value) {
 
 void mapTest() {
     int items[5] = {23, 12, 43, 54, 73};
-    auto* queue = new LinkedListSequence<int>(items, 5);
-    auto* oldQueue = new Queue<int>(*queue);
+    auto* queue = new Queue<int>(items, 5);
+    auto* oldQueue = new Queue<int>(items, 5);
     oldQueue -> map(multiplyByTwo);
     for (int i = 0; i < 5; i++) {
         assert(queue -> get(i) * 2 == oldQueue -> get(i));
@@ -70,8 +70,8 @@ void mapTest() {
 void queueTest() {
     queueAppendTest();
     queuePrependTest();
-    //queueSubSequenceTest();
-    //mapTest();
+    queueSubSequenceTest();
+    mapTest();
     peekTest();
     popTest();
     pushTest();
