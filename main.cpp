@@ -2,6 +2,7 @@
 #include "ArraySequence.h"
 #include "LinkedListSequence.h"
 #include "Queue.h"
+#include "QueueArray.h"
 
 using namespace std;
 
@@ -20,18 +21,19 @@ void menu() {
         input(&data_type);
     } while (data_type != 2 && data_type != 1);
     if (data_type == 1) {
-        cout << "1. ListSequence" << endl << "2. ArraySequence" << endl;
+        cout << "1. Queue" << endl << "2. QueueArray" << endl;
         int type = -1;
         do {
             input(&type);
         } while (type != 1 && type != 2);
-        Queue<int> *seq;
+        Queue<int> *queue;
+        QueueArray<int> *seq2;
         if (type == 1) {
-            seq = new LinkedListSequence<int>();
+            queue = new Queue<int>();
         } else {
-            seq = new ArraySequence<int>;
+            seq2 = new QueueArray<int>();
         }
-        cout << "1. Append" << endl << "2. Prepend" << endl << "3. Insert at" << endl << "4. Get length" << endl << "5. Print" << endl << "6. Subsequence" << endl << "0. Exit";
+        cout << "1. Append" << endl << "2. Prepend" << endl << "3. Get length" << endl << "4. Print" << endl << "0. Exit" << endl;
         while (true) {
             type = -1;
             int index;
@@ -47,56 +49,35 @@ void menu() {
                 case 1:
                     cout << "Enter appending item" << endl;
                     input(&item);
-                    seq -> append(item);
+                    queue -> append(item);
                     break;
                 case 2:
                     cout << "Enter prepend item" << endl;
                     input(&item);
-                    seq -> prepend(item);
+                    queue -> prepend(item);
                     break;
                 case 3:
-                    cout << "Enter insert index" << endl;
-                    input(&index);
-                    try {
-                        cout << "Enter insert item" << endl;
-                        input(&item);
-                        seq -> insertAt(item, index);
-
-                    } catch (Exception& exception) {
-                        cout << "Process finished with error code = " << exception.number << endl;
-                        exit(0);
-                    }
+                    cout << "The length is: " << queue -> getSize() << endl;
                     break;
                 case 4:
-                    cout << "The length is: " << seq -> getLength() << endl;
+                    cout << queue << endl;
                     break;
-                case 5:
-                    cout << seq << endl;
-                    break;
-                case 6:
-                    int fromIndex;
-                    int toIndex;
-                    cout << "Enter start index" << endl;
-                    input(&fromIndex);
-                    cout << "Enter end index" << endl;
-                    input(&toIndex);
-                    Sequence<int> *seq2 = seq -> getSubsequence(fromIndex, toIndex);
-                    cout << "Subsequence : " << seq2 << endl;
             }
         }
     } else {
-        cout << "1. ListSequence" << endl << "2. ArraySequence" << endl;
+        cout << "1. Queue" << endl << "2. QueueArray" << endl;
         int type = -1;
         do {
             input(&type);
         } while (type != 1 && type != 2);
-        Sequence<double> *seq;
+        Queue<double> *queue;
+        QueueArray<double> *queue2;
         if (type == 1) {
-            seq = new LinkedListSequence<double>();
+            queue = new Queue<double>();
         } else {
-            seq = new ArraySequence<double>;
+            queue2 = new QueueArray<double>();
         }
-        cout << "1. Append" << endl << "2. Prepend" << endl << "3. Insert at" << endl << "4. Get length" << endl << "5. Print" << endl << "6. Subsequence" << endl << "0. Exit";
+        cout << "1. Append" << endl << "2. Prepend" << endl << "3. Get length" << endl << "4. Print" << endl << "0. Exit";
         while (true) {
             type = -1;
             int index;
@@ -112,40 +93,19 @@ void menu() {
                 case 1:
                     cout << "Enter appending item" << endl;
                     input(&item);
-                    seq -> append(item);
+                    queue -> append(item);
                     break;
                 case 2:
                     cout << "Enter prepend item" << endl;
                     input(&item);
-                    seq -> prepend(item);
+                    queue -> prepend(item);
                     break;
                 case 3:
-                    cout << "Enter insert index" << endl;
-                    input(&index);
-                    try {
-                        cout << "Enter insert item" << endl;
-                        input(&item);
-                        seq -> insertAt(item, index);
-                    } catch (Exception& exception) {
-                        cout << "Process finished with error code = " << exception.number << endl;
-                        exit(0);
-                    }
+                    cout << "The length is: " << queue -> getSize() << endl;
                     break;
                 case 4:
-                    cout << "The length is: " << seq -> getLength() << endl;
+                    cout << queue << endl;
                     break;
-                case 5:
-                    cout << seq << endl;
-                    break;
-                case 6:
-                    int fromIndex;
-                    int toIndex;
-                    cout << "Enter start index" << endl;
-                    input(&fromIndex);
-                    cout << "Enter end index" << endl;
-                    input(&toIndex);
-                    Sequence<double> *seq2 = seq -> getSubsequence(fromIndex, toIndex);
-                    cout << "Subsequence : " << seq2 << endl;
             }
         }
     }

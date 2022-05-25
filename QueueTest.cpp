@@ -57,7 +57,7 @@ T multiplyByTwo(T value) {
     return value * 2;
 }
 
-/*void mapTest() {
+void mapTest() {
     int items[5] = {23, 12, 43, 54, 73};
     auto* queue = new LinkedListSequence<int>(items, 5);
     auto* oldQueue = new Queue<int>(*queue);
@@ -65,7 +65,7 @@ T multiplyByTwo(T value) {
     for (int i = 0; i < 5; i++) {
         assert(queue -> get(i) * 2 == oldQueue -> get(i));
     }
-}*/
+}
 
 void queueTest() {
     queueAppendTest();

@@ -10,7 +10,7 @@
 template <class T>
 class QueueArray {
 private:
-    ArraySequence* array;
+    ArraySequence<T>* array;
 public:
     QueueArray() {
         array = new ArraySequence<T>();
