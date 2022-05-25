@@ -20,12 +20,13 @@ public:
         internalListSequence = new LinkedListSequence<T>();
     }
     //Конструктор копирования
-    /*Queue(const Queue<T>& que) {
-        internalListSequence = new LinkedListSequence<T>();
+    Queue(const Queue& que) {
+        /*internalListSequence = new LinkedListSequence<T>();
         for (int i = 0; i< que.getSize();i++) {
             internalListSequence -> append(que.peek(i));
-        }
-    }*/
+        }*/
+        internalListSequence = new LinkedListSequence<T>(que.internalListSequence);
+    }
     Queue(T* items, int count) {
         internalListSequence = new LinkedListSequence(items, count);
     }
@@ -104,19 +105,15 @@ T& Queue<T>::operator[](int index) {
     if (index > getSize() - 1 || index < 0) {
         throw Exception(1);
     }
-    return internalListSequence[index];
+    return this -> internalListSequence[index];
 }
 
 template <typename T>
-ostream & operator << (ostream & out, Queue<T> queue) {
-    try {
-        for (int i = 0; i < queue.getSize(); ++i) {
-            out << queue.get(i) << " ";
-        }
-        return out;
-    } catch (Exception &exception) {
-        throw exception;
+ostream & operator << (ostream & out, Queue<T>* queue) {
+    for (int i = 0; i < queue -> getSize(); i++) {
+        out << queue -> get(i) << " ";
     }
+    return out;
 }
 
 #endif //LAB2_2SEM_QUEUE_H

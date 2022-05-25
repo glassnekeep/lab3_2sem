@@ -78,4 +78,12 @@ public:
     }
 };
 
+template <typename T>
+ostream & operator << (ostream & out, QueueArray<T>* queueArray) {
+    for (int i = 0; i < queueArray -> getSize(); i++) {
+        out << queueArray -> get(i) << " ";
+    }
+    return out;
+}
+
 #endif //LAB3_2SEM_QUEUEARRAY_H

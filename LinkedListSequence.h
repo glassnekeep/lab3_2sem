@@ -154,10 +154,9 @@ void LinkedListSequence<T>::set(int index, T value) {
 }
 
 template<typename T>
-ostream & operator << (ostream & out, LinkedListSequence<T> array)
-{
-    for (int i = 0; i < array.getLength(); ++i)
-        out << array.get(i) << " ";
+ostream & operator << (ostream & out, LinkedListSequence<T>* array) {
+    for (int i = 0; i < array -> getLength(); ++i)
+        out << array -> get(i) << " ";
     return out;
 }
 
