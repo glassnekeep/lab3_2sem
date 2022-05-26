@@ -71,13 +71,13 @@ void menu() {
             input(&type);
         } while (type != 1 && type != 2);
         Queue<double> *queue;
-        QueueArray<double> *queue2;
+        QueueArray<double> *seq2;
         if (type == 1) {
             queue = new Queue<double>();
         } else {
-            queue2 = new QueueArray<double>();
+            seq2 = new QueueArray<double>();
         }
-        cout << "1. Append" << endl << "2. Prepend" << endl << "3. Get length" << endl << "4. Print" << endl << "0. Exit";
+        cout << "1. Append" << endl << "2. Prepend" << endl << "3. Get length" << endl << "4. Print" << endl << "0. Exit" << endl;
         while (true) {
             type = -1;
             int index;
@@ -85,7 +85,7 @@ void menu() {
                 cout << "Choose option" << endl;
                 input(&type);
             }
-            double item;
+            int item;
             switch (type) {
                 case 0:
                     exit(0);

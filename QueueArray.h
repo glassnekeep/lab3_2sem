@@ -10,78 +10,101 @@
 template <class T>
 class QueueArray {
 private:
-    ArraySequence<T>* array;
+    ArraySequence<T>* internalArray; // указатель на связный список
 public:
+    T& operator[](int index);
+    // Конструкторы
     QueueArray() {
-        array = new ArraySequence<T>();
+        internalArray = new ArraySequence<T>();
     }
     //Конструктор копирования
-    QueueArray(QueueArray<T>& que) {
-        array = new ArraySequence<T>();
-        for (int i = 0; i < que.getSize();i++) {
-            array -> append(que.peek(i));
-        }
+    QueueArray(QueueArray& que) {
+        internalArray = new ArraySequence<T>(*que.internalArray);
+    }
+    QueueArray(T* items, int count) {
+        internalArray = new ArraySequence(items, count);
+    }
+    explicit QueueArray(const ArraySequence<T>& list) {
+        internalArray = new ArraySequence<T>(list);
     }
     // Деструктор
     ~QueueArray() {
-        delete array;
+        delete internalArray;
+    }
+    T get(int index) {
+        try {
+            T result = internalArray -> get(index);
+            return result;
+        } catch (Exception& exception) {
+            throw exception;
+        }
     }
     // добавить элемент в очередь
     void push(const T& data) {
-        array -> append(data);
+        internalArray -> append(data);
     }
-    //pol вместо pop по соглашению
-    // удалить элемент из начала очереди
     T pop() {
-        T result = array -> getFirst();
-        array = (ArraySequence<T>*)array -> getSubsequence(1, array -> getLength() - 1);
+        T result = internalArray -> getFirst();
+        internalArray = (ArraySequence<T>*)internalArray -> getSubsequence(1, internalArray->getLength() - 1);
         return result;
     }
     // TODO: Если будет сложно состовной тип класс, то в нём описываем перегрузку оператора стрелочки <<
     // вывод очереди
     void printQueue() {
-        for (int i = 0; i < array -> getLength(); i++) {
-            cout <<i<<".  " << array-> get(i) << endl;
+        for (int i = 0; i < internalArray -> getLength(); i++) {
+            cout <<i<<".  "<< internalArray -> get(i) << endl;
         }
     }
     // n-й элемент от вершины очереди
     T peek(int index) {
-        return array -> get(index);
+        return internalArray -> get(index);
     }
     // получить размер очереди
     int getSize() {
-        return array -> getLength();
+        return internalArray -> getLength();
+    }
+    void append(T item) {
+        internalArray -> append(item);
+    }
+    void prepend(T item) {
+        internalArray -> prepend(item);
     }
     // пуста ли очередь
     bool isEmpty() {
-        return (array -> getLength() < 1);
+        return (internalArray -> getLength() < 1);
     }
     void map(T mupFunc(T arg)) {
-        array -> map(mupFunc);
+        int size = internalArray -> getLength();
+        internalArray -> map(mupFunc);
     }
     void where(bool(*whereFunc)(T)) {
-        ArraySequence<T>* buf = array;
-        array = array -> where(whereFunc);
+        ArraySequence<T>* buf = internalArray;
+        internalArray = internalArray -> where(whereFunc);
         delete buf;
     }
     QueueArray<T>* concat(QueueArray<T>& que2) {
-        array -> concat(que2.array);
+        internalArray -> concat(que2.internalArray);
         return this;
     }
-    QueueArray<T>* getSubsequence(int startIndex, int endIndex) {
-        auto* bufQue = new QueueArray<T>;
-        bufQue -> array = array -> getSubsequence(startIndex, endIndex);
-        return bufQue;
+    Sequence<T>* getSubsequence(int startIndex, int endIndex) {
+        return internalArray -> getSubsequence(startIndex, endIndex);
     }
     bool subSequence(QueueArray<T>& queue) {
-        return array -> subSequence(queue.internalListSequence);
+        return internalArray -> subSequence(queue.internalArray);
     }
 };
+template <class T>
+T& QueueArray<T>::operator[](int index) {
+    if (index > getSize() - 1 || index < 0) {
+        throw Exception(1);
+    }
+    return this -> internalArray[index];
+}
 
 template <typename T>
-ostream & operator << (ostream & out, QueueArray<T>* queueArray) {
-    for (int i = 0; i < queueArray -> getSize(); i++) {
-        out << queueArray -> get(i) << " ";
+ostream & operator << (ostream & out, Queue<T>* queue) {
+    for (int i = 0; i < queue -> getSize(); i++) {
+        out << queue -> get(i) << " ";
     }
     return out;
 }
