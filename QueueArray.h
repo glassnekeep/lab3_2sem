@@ -102,7 +102,7 @@ T& QueueArray<T>::operator[](int index) {
 }
 
 template <typename T>
-ostream & operator << (ostream & out, Queue<T>* queue) {
+ostream & operator << (ostream & out, QueueArray<T>* queue) {
     for (int i = 0; i < queue -> getSize(); i++) {
         out << queue -> get(i) << " ";
     }
