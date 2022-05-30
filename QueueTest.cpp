@@ -9,10 +9,14 @@
 using namespace std;
 
 void queueAppendTest() {
-    int items[5] = {23, 12, 43, 54, 66};
-    auto* queue = new Queue<int>(items, 5);
+    int items[2] = {23, 12};
+    int finalItems[3] = {23, 12, 42};
+    auto* queue = new Queue<int>(items, 2);
     queue -> append(42);
-    assert(queue -> get(5) == 42);
+    auto* finalQueue = new Queue<int>(finalItems, 3);
+    for (int i = 0; i < 3; i++) {
+        assert(queue -> get(i) == finalQueue -> get(i));
+    }
 }
 
 void queuePrependTest() {

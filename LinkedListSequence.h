@@ -15,6 +15,7 @@ private:
 public:
     //Конструкторы
     LinkedListSequence();
+    explicit LinkedListSequence(Sequence<T> &sequence);
     explicit LinkedListSequence(int count);
     LinkedListSequence(T *items,int count);
     explicit LinkedListSequence(const LinkedList<T> &previousList );
@@ -151,6 +152,13 @@ void LinkedListSequence<T>::map(T (*mapFunc)(T)) {
 template<class T>
 void LinkedListSequence<T>::set(int index, T value) {
     list -> set(index, value);
+}
+
+template<class T>
+LinkedListSequence<T>::LinkedListSequence(Sequence<T>& sequence) {
+    for (int i = 0; i < sequence . getLength(); i++) {
+        list -> append(sequence -> get(i));
+    }
 }
 
 template<typename T>

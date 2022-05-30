@@ -85,7 +85,10 @@ public:
         delete buf;
     }
     Queue<T>* concat(Queue<T>& que2) {
-        internalListSequence -> concat(que2.internalListSequence);
+        //internalListSequence = new LinkedListSequence<T>(*(internalListSequence -> concat(que2.internalListSequence)));
+        for (int i = 0; i < que2.getSize(); i++) {
+            this -> append(que2.get(i));
+        }
         return this;
     }
     Sequence<T>* getSubsequence(int startIndex, int endIndex) {
