@@ -79,6 +79,19 @@ void mapTest() {
     }
 }
 
+void concatTest() {
+    int items1[3] = {23, 12, 43};
+    int items2[2] = {54, 73};
+    int items3[5] = {23, 12, 43, 54, 73};
+    auto* queue1 = new Queue<int>(items1, 3);
+    auto* queue2 = new Queue<int>(items2, 2);
+    auto* queue3 = new Queue<int>(items3, 5);
+    queue1 -> concat(*queue2);
+    for (int i = 0; i < 5; i++) {
+        assert(queue1 -> get(i) == queue3 -> get(i));
+    }
+}
+
 void queueTest() {
     queueAppendTest();
     queuePrependTest();
@@ -87,6 +100,7 @@ void queueTest() {
     peekTest();
     popTest();
     pushTest();
+    concatTest();
     cout << "Queue tests passed successfully";
 }
 
