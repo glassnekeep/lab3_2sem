@@ -20,10 +20,14 @@ void queueAppendTest() {
 }
 
 void queuePrependTest() {
-    int items[5] = {23, 12, 43, 54, 66};
-    auto* queue = new Queue<int>(items, 5);
+    int items[2] = {23, 12};
+    int finalItems[3] = {42, 23, 12};
+    auto* queue = new Queue<int>(items, 2);
     queue -> prepend(42);
-    assert(queue -> get(0) == 42);
+    auto* finalQueue = new Queue<int>(finalItems, 3);
+    for (int i = 0; i < 3; i++) {
+        assert(queue -> get(i) == finalQueue -> get(i));
+    }
 }
 
 void queueSubSequenceTest() {
@@ -45,7 +49,11 @@ void pushTest() {
 void popTest() {
     int items[5] = {23, 12, 43, 54, 73};
     auto* queue = new Queue<int>(items, 5);
+    auto* queue1 = new Queue<int>(items, 5);
     int popValue = queue -> pop();
+    for (int i = 0; i < 4; i++) {
+        assert(queue -> get(i) == queue1 -> get(i + 1));
+    }
     assert(popValue == 23);
 }
 
